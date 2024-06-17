@@ -1,0 +1,6 @@
+
+		begin
+      f = addfile("/Users/aidanjanney/VS Code/Zhong Geophysics/ICE6G Testing/COMBINED_TIME_ICE-6G_C.nc","r")
+      print(f)
+		end
+    
