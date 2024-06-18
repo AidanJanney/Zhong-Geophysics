@@ -1,0 +1,40 @@
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --time=03:00:00
+#SBATCH --ntasks=1
+#SBATCH --job-name=GIA-Analytic-Test
+#SBATCH --partition=amilan
+#SBATCH --mail-type=BEGIN,END
+#SBATCH --mail-user=aija9929@colorado.edu
+#SBATCH --output=TRIAL1-GIA-Analytic-Test.%j.out
+
+module purge
+
+module load gcc/13.2.0
+module load anaconda
+
+conda activate GIA_Analytical
+
+cd /projects/aija9929/Zhong_Geophysics/version3_vFinal_with_RSLgroup/version3_vFinal_GlennPresentdayTopo_lmax100
+
+echo "============ FINDING LOVE NUMBERS ============"
+time bash run
+echo "============ COMPILE STOKES ==========="
+time bash compile_stokes.sh
+echo "============ RUN STOKES ==========="
+time bash runstokes.sh
+
+echo "============ POSTPROCESSING ============"
+echo "============ POSTPROCESSING ============"
+
+cd scripts_kendall_impl
+
+echo "============ COMPUTE EUSTATIC ============"
+time python A2_compute_c_eustatic.py
+echo "=========== COMPUTE RSL GROUPS ============"
+time python A4_compute_rsl_groups.py
+
+echo "DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE DONE"
+
+
+
