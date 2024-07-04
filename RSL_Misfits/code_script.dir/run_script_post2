@@ -1,0 +1,30 @@
+#!/bin/sh
+export PATH=/usr/bin:$PATH
+
+#for i in $(seq -f "%03g" 2 42)  
+for i in $(seq -f "%03g" 301 600)  
+do
+    #rm ./grid$i/*txt
+    #rm ./grid$i/PW*
+    echo grid$i
+    #mkdir ../grid$i
+    #cp ../grid_copy.dir/* ../grid$i/
+    #cp ../fn_para_collocation.dir/in.para.collocation$i ../grid$i/in.para.collocation
+
+    cd /home/khuan/ICE6G_results_0.1grids/grid$i/
+    # Calculate love number
+    #./run
+
+    # Calucate rsl/uplift/geoid
+    #./runstokes
+
+    # Eustatic RSL
+    #cp /home/khuan/gridresearch_results_ICE6G_batch/code_script.dir/rsl_uniform.py ./
+    #python ./rsl_uniform.py
+    #cp -r ../grid$i ~khuan/gridresearch_results_ANU_batch_0.1girds/
+
+    # Calculate RSL interpolation at RSL sites
+    cp /home/khuan/gridresearch_results_ICE6G_batch/code_script.dir/ts_location_output_fortran.py ./
+    python ts_location_output_fortran.py
+
+done

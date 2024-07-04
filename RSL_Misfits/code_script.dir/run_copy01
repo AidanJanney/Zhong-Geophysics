@@ -1,0 +1,12 @@
+#!/bin/sh
+export PATH=/usr/bin:$PATH
+
+#for i in $(seq -f "%03g" 2 42)  
+scratchID=16
+mkdir /scratch_node$scratchID/khuan/results_0.1grids
+for i in $(seq -f "%02g" 13 18)
+do
+    echo scratch_node$i
+    cp -r /scratch_node$i/khuan/gridresearch_results_ANU_batch*/grid???  /scratch_node$scratchID/khuan/results_0.1grids
+
+done

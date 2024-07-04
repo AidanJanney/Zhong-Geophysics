@@ -1,0 +1,29 @@
+#!/bin/sh
+export PATH=/usr/bin:$PATH
+
+#for i in $(seq -f "%03g" 2 42)  
+for i in $(seq -f "%03g" 1 2)  
+do
+    #rm ./grid$i/*txt
+    #rm ./grid$i/PW*
+    echo grid$i
+    mkdir ../grid$i
+    cp ../grid_copy.dir/* ../grid$i/
+    cp ../fn_para_collocation.dir/in.para.collocation$i ../grid$i/in.para.collocation
+
+    cd ../grid$i/
+    # Calculate love number
+    ./run
+
+    # Calucate rsl/uplift/geoid
+    ./runstokes
+
+    # delete input data to save space
+    /bin/rm ice6g*
+    /bin/rm ocn6g*
+
+    # Eustatic RSL
+    #python ./rsl_uniform_Glenn.py
+    #cp -r ../grid$i ~khuan/gridresearch_results_ANU_batch_0.1girds/
+
+done

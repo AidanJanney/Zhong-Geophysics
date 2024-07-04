@@ -1,0 +1,44 @@
+1
+1   3   1                         (use_sle, iter, polar_wander)
+'ice6g+ocn.lmax100.txt'    100    (input file, and max no of l's in that input file)
+100                            (maximum number of l's to include)
+'stokes.ice6g'       (output file)
+0.935759d0
+
+
+
+
+1.1166406209728472 #vm5a 
+
+
+1.1197618996543905
+
+
+
+1.1166406209728472
+
+
+
+
+
+
+1.1016615908859579
+
+1.1419055618768867  prem 4745 density
+
+
+1.1016615731670611  paul's model
+
+version 2 corresponds to a different kf = 0.935759d0
+0.940954d0
+
+0.988781922187244 
+
+0.940954d0
+
+0.984826568581501d0
+
+
+
+0.940954d0
+

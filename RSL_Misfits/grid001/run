@@ -1,0 +1,10 @@
+#!/bin/bash
+export PATH=/usr/bin:$PATH
+
+gfortran -c -fdefault-real-8 test.f
+gfortran -o a1.out test.o
+./a1.out
+
+#gfortran -c test.stokes.f
+#gfortran -o  a.out test.stokes.o
+#./a.out
