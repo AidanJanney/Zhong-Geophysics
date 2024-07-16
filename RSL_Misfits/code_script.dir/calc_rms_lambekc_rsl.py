@@ -32,7 +32,7 @@ def calc_RMS_grid(idGridFile):
 	ddirRSL = '/home/khuan/rsl_database/'
 	
         # Lamebek 2014 far field RSL database
-        fnRSL = 'Lambeck_etal_2014_PNAS_supp_edit.xlsx'
+	fnRSL = 'Lambeck_etal_2014_PNAS_supp_edit.xlsx'
 
 	data = pandas.read_excel(path.join(ddirRSL, fnRSL))
 	sitename = data['Site'].values
@@ -58,8 +58,8 @@ def calc_RMS_grid(idGridFile):
 	fn_sitename = 'Sitename_Lambeck_FarField_selected.txt'
 	#fn_sitename = 'Sitename_Lambeck_NA_all.txt'
 	#selected_sitename = np.loadtxt(path.join(ddir_sitename, fn_sitename), dtype=np.str) # loadtxt does not work here because the site name has space between words or uneven collums data
-        f_sitename = open(path.join(ddir_sitename, fn_sitename), 'r')
-        selected_sitename = f_sitename.readlines()
+	f_sitename = open(path.join(ddir_sitename, fn_sitename), 'r')
+	selected_sitename = f_sitename.readlines()
 
 
 	err = np.zeros(len(selected_sitename))
@@ -68,15 +68,15 @@ def calc_RMS_grid(idGridFile):
 	    #print(idx_site)
 	    # Read model predictions
 	    rslModelAtSite = rslModel[idx_site, :]
-	    rslModelAtSite = rslModelAtSite - rslModelAtSite[-1]
+    	rslModelAtSite = rslModelAtSite - rslModelAtSite[-1]
 
 	    # Search rsl data for idx_site
-	    sitenameAtSite = selected_sitename[idx_site].strip() # delete /n in string
-	    idx_sitename = (sitenameAtSite == sitename)
+    	sitenameAtSite = selected_sitename[idx_site].strip() # delete /n in string
+		idx_sitename = (sitenameAtSite == sitename)
 
-	    rslDataAtSite = RSL[idx_sitename]
-	    rslerrAtSite = RSLerr[idx_sitename]
-	    ageAtSite = age[idx_sitename]
+		rslDataAtSite = RSL[idx_sitename]
+		rslerrAtSite = RSLerr[idx_sitename]
+		ageAtSite = age[idx_sitename]
 
 	    # Make the plot for comparisons
 	    #plt.figure(figsize=(10,7))
@@ -99,7 +99,7 @@ def calc_RMS_grid(idGridFile):
 
 	    # Calculate the RMS between rsl data and model predictions
 	    #rslDataError = np.stack((np.abs(rslDataAtSite-rslDataMinAtSite), np.abs(rslDataMaxAtSite-rslDataAtSite)), axis=0).max(axis=0)
-            rslDataError = np.abs(rslerrAtSite)
+        rslDataError = np.abs(rslerrAtSite)
 	    #timeDataError = np.stack((np.abs(ageAtSite-ageMinAtSite), np.abs(ageMaxAtSite-ageAtSite)), axis=0).max(axis=0)
 
 	    # Search the index for the nearest model predictions to the rsl data at each time
@@ -122,18 +122,18 @@ def calc_RMS_grid(idGridFile):
 	    #err[idx_site] = np.mean(((rslDataAtSite - rslModelAtSite[idx_rslModel]) / rslDataError)**2)
 
             # Interpolate model predictions at epochs of RSL data point
-            f = interpolate.interp1d(rslModelTime, rslModelAtSite)
-            rslModel_interp = f(ageAtSite)
+        f = interpolate.interp1d(rslModelTime, rslModelAtSite)
+        rslModel_interp = f(ageAtSite)
 
             # Compute misfit
-            err[idx_site] = np.mean(((rslDataAtSite - rslModel_interp) / rslDataError)**2)
+        err[idx_site] = np.mean(((rslDataAtSite - rslModel_interp) / rslDataError)**2)
             #pdb.set_trace()
 	    # Jacobi
 
 
 	# Calculate the global average RMS
 	errGlobalMean = np.mean(err)
-        print('grid {} RMS: {}'.format(idGridFile, errGlobalMean))
+    print('grid {} RMS: {}'.format(idGridFile, errGlobalMean))
 	return errGlobalMean
 
 # Generate index for grided files
